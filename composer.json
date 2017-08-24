@@ -1,0 +1,14 @@
+{
+  "name": "brkphp/netgsm",
+  "description": "Santral, Sms and etc. for netgsm company",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Burak Akdeniz",
+      "email": "destek@burakakdeniz.com.tr"
+    }
+  ],
+  "minimum-stability": "stable",
+  "require": {}
+}
