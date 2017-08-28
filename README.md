@@ -26,12 +26,12 @@ Brkphp\Netgsm\NetgsmServiceProvider::class,
 'Netgsm' => Brkphp\Netgsm\Facade\Netgsm::class,
 ```
  
- **Ayarları Yayınlamak için :** 
+ Ayarları Yayınlamak için : 
 ```
 php artisan vendor:publish 
 ```
 
- **Ayarları Yapmak için  :** 
+ Ayarları Yapmak için  : 
 ```
 Config/netgsm.php içinde sisteme giriş yaparken kullandığınız bilgileri giriniz.
 ```
@@ -57,7 +57,7 @@ return $new->dateQuery();
 ```
 
 
->Tarihler date('dmYHis') formatında olmalıdır.
+>Tarihler date('dmYHi') formatında olmalıdır.
 
 
 **Telefon Numarası ile Kayıtları çekmek için** 
