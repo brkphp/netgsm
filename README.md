@@ -37,6 +37,21 @@ php artisan vendor:publish
 Config/netgsm.php içinde sisteme giriş yaparken kullandığınız bilgileri giriniz.
 ```
 
+
+Sms Örnekleri
+====================
+**Sms Göndermek için** 
+
+```
+    $new = new \Brkphp\Netgsm\Sms();
+    $new->message('deneme mesaj');
+    $new->phone('0123456789');
+    return $new->send();
+```
+
+Santral Örnekleri
+====================
+
 **Bugünün Kayıtlarını çekmek için** 
 
 ```
@@ -79,8 +94,14 @@ $new->uniqId(123456789);
 $new->uniqId(987654321);
 return $new->sendQuery();
 ```
+İleri Seviye
+====================
+herhangi bir ekstra veri göndermek isterseniz aşağıdaki parametreleri kullanabilirsiniz sms ve santral iki sınıftada kullanılabilir.
 
+```
+$new->addHeadParameter('key','value')
+$new->addBodyParameter('key','value')
+```
 
 > Parametreler ile ilgili detaylı bilgi Netgsm Api Dökümanında bulunmaktadır. 
 > [Net Gsm Api](https://www.netgsm.com.tr/Dokuman/sanal-santral.asp "Net Gsm Api")
-
