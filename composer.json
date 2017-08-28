@@ -3,6 +3,7 @@
   "description": "Santral, Sms and etc. for netgsm company",
   "type": "library",
   "license": "MIT",
+  "keywords" : ["laravel" , "netgsm"],
   "authors": [
     {
       "name": "Burak Akdeniz",
@@ -10,5 +11,10 @@
     }
   ],
   "minimum-stability": "stable",
-  "require": {}
+  "require": {},
+  "autoload": {
+    "psr-4": {
+      "Brkphp\\Netgsm\\": "src/"
+    }
+  }
 }
