@@ -8,5 +8,5 @@ Ayrıca eğer API erişiminizde IP sınırlaması yaptıysanız ve sınırladı�
     70 => "Hatalı sorgulama. Gönderdiğiniz parametrelerden birisi hatalı veya zorunlu alanlardan birinin eksik olduğunu ifade eder.",
     100 => "Sistem hatası, sınır aşımı.(dakikada en fazla 2 kez sorgulanabilir.)",
     101 => "Sistem hatası, sınır aşımı.(dakikada en fazla 2 kez sorgulanabilir.)",
-    120 => "Olağandışılık Yakalandı : :CODE "
+    120 => "Olağandışılık Yakalandı : :CODE ",
 ];
