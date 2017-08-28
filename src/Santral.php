@@ -3,15 +3,6 @@
 class Santral extends Netgsm
 {
 
-
-    /**
-     * @var string
-     */
-    public $headParameters = "";
-    /**
-     * @var string
-     */
-    public $bodyParameters = "";
     /**
      * @var null
      */
@@ -22,16 +13,6 @@ class Santral extends Netgsm
     public $stopDate = null;
 
 
-    /**
-     * Santral constructor.
-     */
-    function __construct()
-    {
-        $this->startDate(date('dmY0000'));
-        $this->stopDate(date('dmY2359'));
-        return $this->headParameters;
-    }
-
 
     /**
      * @param null $startDate
@@ -40,33 +21,31 @@ class Santral extends Netgsm
     public function startDate($startDate)
     {
         $this->headParameters = null;
-        $this->headParameters .= sprintf('<startdate>%s</startdate>', $startDate);
+        $this->addHeadParameter('startdate',$startDate);
         $this->startDate = $startDate;
     }
-
 
     /**
      * @param null $stopDate
      */
     public function stopDate($stopDate)
     {
-        $this->headParameters .= sprintf('<stopdate>%s</stopdate>', $stopDate);
-         $this->stopDate = $stopDate;
+       $this->addHeadParameter('stopdate',$stopDate);
+       $this->stopDate = $stopDate;
     }
 
     /**
      * @param $uniq
      */
     public function uniqId($uniq){
-        $this->bodyParameters .= sprintf('<uniqueid>%s</uniqueid>', $uniq);
+        $this->addBodyParameter('uniqueid',$uniq);
     }
 
     /**
      * @param $phone
      */
     public function phone($phone){
-        $this->bodyParameters .= sprintf('<no>%s</no>', $phone);
-
+        $this->addBodyParameter('no',$phone);
     }
 
     /**
@@ -75,8 +54,11 @@ class Santral extends Netgsm
      */
     public function dateQuery($type = 2)
     {
-        $this->headParameters .= "<tip>$type</tip>";
-        $response = $this->_do(config('netgsm.santral_api_Url'),$this->xmlGenerator($this->headParameters));
+        if($this->headParameters == ""){
+            $this->addTodayParameter();
+        }
+        $this->addHeadParameter('tip',$type);
+     return   $response = $this->_do(config('netgsm.santral_api_Url'),$this->xmlGenerator());
         return $this->jsonParse($response);
     }
 
@@ -84,10 +66,15 @@ class Santral extends Netgsm
      * @return array
      */
     public function sendQuery(){
-        $response = $this->_do(config('netgsm.santral_api_Url'),$this->xmlGenerator($this->bodyParameters));
+        $response = $this->_do(config('netgsm.santral_api_Url'),$this->xmlGenerator());
         return $this->jsonParse($response);
     }
 
+    public function addTodayParameter(){
+        $this->addHeadParameter('startdate',date('dmY0000'));
+        $this->addHeadParameter('stopdate',date('dmY2359'));
+
+    }
 
 
 

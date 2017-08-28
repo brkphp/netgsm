@@ -2,13 +2,29 @@
 
 class Netgsm {
 
+    /**
+     * @var string
+     */
+    public $headParameters = "";
+    /**
+     * @var string
+     */
+    public $bodyParameters = "";
 
+    /**
+     * @var array
+     */
     public  $dizi = array();
     private $netGsmParameters = array(
       'uniqid','date','dialed','caller','duration' , 'direction' , 'file'
     );
 
-    function xmlGenerator($headParameters = "",$bodyParameters = ""){
+    /**
+     * @param string $headParameters
+     * @param string $bodyParameters
+     * @return string
+     */
+    function xmlGenerator(){
        return $xml="<?xml version='1.0' encoding='utf-8' ?>
 			<mainbody>
 			<header>
@@ -16,15 +32,29 @@ class Netgsm {
 				<usercode>".config('netgsm.username')."</usercode>
 				<password>".config('netgsm.password')."</password>
 				<version>3</version>
-				".$headParameters."
+				".$this->headParameters."
 			</header>
 			<body>
-			    ".$bodyParameters."
+			  		".$this->bodyParameters."
             </body>
 			</mainbody>";
     }
 
+    /**
+     * @param $key
+     * @param $value
+     */
+    public function addHeadParameter($key, $value){
+        $this->headParameters .= sprintf('<%s>%s</%s>', $key,$value,$key);
+    }
 
+    /**
+     * @param $key
+     * @param $value
+     */
+    public function addBodyParameter($key, $value){
+        $this->bodyParameters .= sprintf('<%s>%s</%s>', $key,$value,$key);
+    }
     /**
      * @param $response
      * @return array
@@ -60,9 +90,15 @@ class Netgsm {
         return $this->dizi;
     }
 
+    /**
+     * @param $response
+     * @return array|bool
+     */
     function checkError($response){
-        if(strlen($response) <= 3){
-            if($response <= 100 and isset($response) != true){
+
+        if(strlen($response) <= 3 ){
+
+            if(intval($response) <= 100 and intval($response) > 0){
                 return [
                     'status' => $response,
                     'message' => trans('netgsm::santral.'.$response)
@@ -70,14 +106,19 @@ class Netgsm {
             }else
                 return ['status' => 120 ,'message'=>trans("netgsm::santral.120",["code" => $response])];
         }
+
         return true;
 
     }
 
 
-    function _do($postAddress,$xmlData)
+    /**
+     * @param $postAddress
+     * @param $xmlData
+     * @return mixed
+     */
+    function _do($postAddress, $xmlData)
     {
-
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL,$postAddress);
         curl_setopt($ch, CURLOPT_SSL_VERIFYHOST,2);
@@ -87,9 +128,11 @@ class Netgsm {
         curl_setopt($ch, CURLOPT_TIMEOUT, 30);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $xmlData);
         $result = curl_exec($ch);
-        if($this->checkError($result) == true){
-            return $result;
-        }
+
+       if (is_array($this->checkError($result))){
+          return $this->checkError($result);
+       }
+        return $result;
     }
 
 
