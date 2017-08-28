@@ -1,5 +1,5 @@
 
-# Netgsm santral paketi
+# Netgsm Laravel paketi
 
 Hakkında
 ====================
