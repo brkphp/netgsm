@@ -15,7 +15,7 @@ Kullanımı
 
  **Kurmak için :** 
 ```
-"brkphp/netgsm" : "1.0.*"
+composer require brkphp/netgsm
 ```
 - App.php Dosyasına Provider olarak ekleyiniz : 
 ``` 
