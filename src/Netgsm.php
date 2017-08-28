@@ -11,13 +11,7 @@ class Netgsm {
      */
     public $bodyParameters = "";
 
-    /**
-     * @var array
-     */
-    public  $dizi = array();
-    private $netGsmParameters = array(
-      'uniqid','date','dialed','caller','duration' , 'direction' , 'file'
-    );
+
 
     /**
      * @param string $headParameters
@@ -28,10 +22,10 @@ class Netgsm {
        return $xml="<?xml version='1.0' encoding='utf-8' ?>
 			<mainbody>
 			<header>
-                <company>Netgsm</company>
+               
 				<usercode>".config('netgsm.username')."</usercode>
 				<password>".config('netgsm.password')."</password>
-				<version>3</version>
+				
 				".$this->headParameters."
 			</header>
 			<body>
@@ -55,40 +49,8 @@ class Netgsm {
     public function addBodyParameter($key, $value){
         $this->bodyParameters .= sprintf('<%s>%s</%s>', $key,$value,$key);
     }
-    /**
-     * @param $response
-     * @return array
-     */
-    function jsonParse($response){
-        $explodeResponse = explode('<br/>',$response);
-        $numItems = count($explodeResponse);
-        $i = 0;
-        foreach($explodeResponse as $key => $gel){
-            if(++$i !== $numItems) {
-                $insideExplode = explode('|',$gel);
-                $inside = array();
-                foreach ($insideExplode as $insideKey => $item){
 
-                    if(config('netgsm.check_duration') == 0){
-                        if(substr_count($insideExplode[4],"0") > 5){
-                            unset($explodeResponse[$key]);
-                            break;
-                        }
-                    }
-                    if(config('netgsm.check_file') != 1){
-                        if(empty(trim($insideExplode[6]))){
-                            unset($explodeResponse[$key]);
-                            break;
-                        }
-                    }
-                    $inside[$this->netGsmParameters[$insideKey]] = trim($item);
-                }
-                $this->dizi[] = $inside;
-            }
-        }
-        $this->dizi = array_values(array_filter($this->dizi));
-        return $this->dizi;
-    }
+
 
     /**
      * @param $response
@@ -117,10 +79,10 @@ class Netgsm {
      * @param $xmlData
      * @return mixed
      */
-    function _do($postAddress, $xmlData)
+    function _do($apiUrl, $xmlData)
     {
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL,$postAddress);
+         $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL,$apiUrl);
         curl_setopt($ch, CURLOPT_SSL_VERIFYHOST,2);
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER,0);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
@@ -129,9 +91,10 @@ class Netgsm {
         curl_setopt($ch, CURLOPT_POSTFIELDS, $xmlData);
         $result = curl_exec($ch);
 
-       if (is_array($this->checkError($result))){
-          return $this->checkError($result);
-       }
+return $result;
+        if (is_array($this->checkError($result))){
+              return $this->checkError($result);
+        }
         return $result;
     }
 

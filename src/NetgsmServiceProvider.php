@@ -33,5 +33,8 @@ class NetgsmServiceProvider extends ServiceProvider
         $this->app['Netgsm'] = $this->app->share(function($app) {
             return new Netgsm;
         });
+        $loader = \Illuminate\Foundation\AliasLoader::getInstance();
+        $loader->alias('Santral','Brkphp\Netgsm\Santral');
+        $loader->alias('Santral','Brkphp\Netgsm\Sms');
     }
 }
