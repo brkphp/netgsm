@@ -69,7 +69,7 @@ class Santral extends Netgsm
             $this->addTodayParameter();
         }
         $this->addHeadParameter('tip',$type);
-     return   $response = $this->_do(config('netgsm.santral_api_url'),$this->xmlGenerator());
+        $response = $this->_do(config('netgsm.santral_api_url'),$this->xmlGenerator());
         return $this->jsonParse($response);
     }
 
