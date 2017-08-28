@@ -32,7 +32,6 @@ class Santral extends Netgsm
      */
     public function startDate($startDate)
     {
-        $this->headParameters = null;
         $this->addHeadParameter('startdate',$startDate);
         $this->startDate = $startDate;
     }
