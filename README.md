@@ -96,7 +96,7 @@ return $new->sendQuery();
 ```
 İleri Seviye
 ====================
-herhangi bir ekstra veri göndermek isterseniz aşağıdaki parametreleri kullanabilirsiniz sms ve santral iki sınıftada kullanılabilir.
+Herhangi bir ekstra veri göndermek isterseniz aşağıdaki fonksiyonları kullanabilirsiniz sms ve santral iki sınıftada kullanılabilir.
 
 ```
 $new->addHeadParameter('key','value')
