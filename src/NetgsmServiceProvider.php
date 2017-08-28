@@ -35,6 +35,6 @@ class NetgsmServiceProvider extends ServiceProvider
         });
         $loader = \Illuminate\Foundation\AliasLoader::getInstance();
         $loader->alias('Santral','Brkphp\Netgsm\Santral');
-        $loader->alias('Santral','Brkphp\Netgsm\Sms');
+        $loader->alias('Sms','Brkphp\Netgsm\Sms');
     }
 }
