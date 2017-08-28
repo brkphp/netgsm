@@ -91,7 +91,6 @@ class Netgsm {
         curl_setopt($ch, CURLOPT_POSTFIELDS, $xmlData);
         $result = curl_exec($ch);
 
-return $result;
         if (is_array($this->checkError($result))){
               return $this->checkError($result);
         }
