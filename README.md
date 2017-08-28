@@ -65,6 +65,7 @@ return $new->dateQuery();
 ```
 $new = new \Brkphp\Netgsm\Santral();
 $new->phone(123456789);
+$new->phone(987654321);
 return $new->sendQuery();
 ```
 
@@ -74,6 +75,7 @@ return $new->sendQuery();
 ```
 $new = new \Brkphp\Netgsm\Santral();
 $new->uniqId(123456789);
+$new->uniqId(987654321);
 return $new->sendQuery();
 ```
 
