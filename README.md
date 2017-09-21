@@ -1,13 +1,10 @@
 
-# Netgsm Laravel paketi
+# Netgsm Laravel Santral ve Sms Paketi
 
 Hakkında
 ====================
 
-Netgsm Santral geçmiş görüşme raporları laravel paketi
-
-> Sms class'ı yazılmaktadır. santralde tarih , telefon numarası ve uniqid ile sorgu yapabilmektedir.
-> Paket tamamlanmamıştır , geliştirilmektedir.
+Netgsm Laravel Santral ve Sms Paketi
 
 Kullanımı
 ====================
