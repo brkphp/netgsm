@@ -19,19 +19,7 @@ class Netgsm {
      * @return string
      */
     function xmlGenerator(){
-       return $xml="<?xml version='1.0' encoding='utf-8' ?>
-			<mainbody>
-			<header>
-               
-				<usercode>".config('netgsm.username')."</usercode>
-				<password>".config('netgsm.password')."</password>
-				
-				".$this->headParameters."
-			</header>
-			<body>
-			  		".$this->bodyParameters."
-            </body>
-			</mainbody>";
+       return $xml="<?xml version='1.0' encoding='utf-8' ?><mainbody><header><usercode>".config('netgsm.username')."</usercode><password>".config('netgsm.password')."</password>".$this->headParameters."</header><body>".$this->bodyParameters."</body></mainbody>";
     }
 
     /**
